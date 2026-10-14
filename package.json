@@ -1,0 +1,34 @@
+{
+  "name": "kombine",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "KOMBINE — E-commerce moderno de moda & lifestyle",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "icons": "node scripts/gen-icons.mjs",
+    "test": "node --test worker/worker.test.mjs",
+    "db:local": "wrangler d1 execute kombine-db --local --file=worker/schema.sql",
+    "db:remote": "wrangler d1 execute kombine-db --remote --file=worker/schema.sql",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.0",
+    "zustand": "^5.0.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.7",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.0",
+    "sharp": "^0.34.2",
+    "tailwindcss": "^4.1.7",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "wrangler": "4.150.0"
+  }
+}
