@@ -1,11 +1,10 @@
+
 name = "kombiine"
 main = "worker/index.js"
 compatibility_date = "2026-10-01"
 
-# O binding DB já está configurado no painel Cloudflare deste projeto.
-# Mantê-lo gerenciado no painel evita substituir o Database ID real por um placeholder.
-# Se migrar a gestão de bindings para este arquivo, adicione [[d1_databases]] com o ID real.
-
+# O binding D1 DB permanece configurado no painel Cloudflare.
+# O código do Worker deve utilizar env.DB.
 
 [vars]
 ALLOWED_ORIGIN = "https://kombine.shop"
