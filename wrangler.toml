@@ -3,11 +3,20 @@ name = "kombiine"
 main = "worker/index.js"
 compatibility_date = "2026-10-01"
 
+
+# Serve o frontend compilado no mesmo host workers.dev.
+# /api/* continua sendo tratado pelo Worker; outras rotas usam o SPA React.
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
 # O binding D1 DB permanece configurado no painel Cloudflare.
 # O código do Worker deve utilizar env.DB.
 
 [vars]
-ALLOWED_ORIGIN = "https://kombine.shop"
+ALLOWED_ORIGIN = "https://kombiine.mariliaschmidt9.workers.dev"
 ALLOW_LOCAL = "false"
 
 [observability.logs]

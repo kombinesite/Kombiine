@@ -12,7 +12,7 @@
     "test": "node --test worker/worker.test.mjs",
     "db:local": "wrangler d1 execute kombine-db --local --file=worker/schema.sql",
     "db:remote": "wrangler d1 execute kombine-db --remote --file=worker/schema.sql",
-    "deploy": "wrangler deploy"
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "react": "^19.1.0",
