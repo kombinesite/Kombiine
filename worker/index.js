@@ -300,12 +300,30 @@ const toPublicPayment = (data) => ({
   ...(data.date_of_expiration ? { expiration: data.date_of_expiration } : {}),
 })
 
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
     const cors = corsHeaders(env, request)
 
-    if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors })
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { status: 204, headers: cors })
+    }
+
+    // Rota raiz: informa que o backend está respondendo.
+    // A loja continua sendo servida pelo frontend.
+    if (url.pathname === '/' && request.method === 'GET') {
+      return json({
+        ok: true,
+        service: 'kombine',
+        message: 'API KOMBINE ativa.',
+        health: '/api/health'
+      }, 200, {
+        'Cache-Control': 'no-store',
+        'Content-Type': 'application/json; charset=utf-8'
+      })
+    }
+
     if (url.pathname.startsWith('/api/') && url.pathname !== '/api/webhooks/mercadopago' && request.headers.get('Origin') && !isOriginAllowed(env, request)) {
       return json({ error: 'Origem não autorizada.' }, 403, cors)
     }
